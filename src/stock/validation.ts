@@ -45,4 +45,15 @@ const RULES = [
     .withMessage('Last must be float'),
 ];
 
-export default RULES;
+const CHECK_ID = [
+  check('id')
+    .not()
+    .isEmpty()
+    .withMessage('Id is required')
+    .bail()
+    .toInt()
+    .isInt()
+    .withMessage('Id must be int'),
+];
+
+export { RULES, CHECK_ID };
