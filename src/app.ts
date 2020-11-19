@@ -15,16 +15,15 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT as string, 10);
-
+const PORT: number = parseInt(process.env.PORT, 10);
 const app = express();
 /**
  *  App Configuration
  */
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use('/stocks', stockRouter);
+app.use(cors()); //Enable cors for any origin
+app.use(express.json()); //Recognize incoming request as json
+app.use('/api/stocks', stockRouter);
 /**
  * Server Activation
  */

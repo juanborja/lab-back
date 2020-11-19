@@ -24,21 +24,27 @@ Stock.init(
     },
     date: {
       type: new DataTypes.DATE(),
+      allowNull: false,
     },
     last: {
       type: new DataTypes.FLOAT(),
+      allowNull: false,
     },
     open: {
       type: new DataTypes.FLOAT(),
+      allowNull: false,
     },
     max: {
       type: new DataTypes.FLOAT(),
+      allowNull: false,
     },
     min: {
       type: new DataTypes.FLOAT(),
+      allowNull: false,
     },
     vol: {
       type: new DataTypes.FLOAT(),
+      allowNull: false,
     },
   },
   {
