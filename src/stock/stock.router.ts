@@ -19,7 +19,11 @@ stockRouter.get('/', async (req: Request, res: Response) => {
     //Default page 0, size 10
     const page = req.query?.page ? Number(req.query?.page) : 0;
     const size = req.query?.size ? Number(req.query?.size) : 10;
-    const stocks = await StockService.findAll(page, size);
+    const attributes = req.query?.fields
+      ? //remove white spaces and transform to array
+        (req.query?.fields as string).replace(/ /g, '').split(',')
+      : ['id'];
+    const stocks = await StockService.findAll(page, size, attributes);
     res.status(200).send(stocks);
   } catch (e) {
     res.status(404).send(e.message);

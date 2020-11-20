@@ -7,8 +7,8 @@ import Stock from './stock.model';
 /**
  * Service Methods
  */
-export const findAll = async (page: number, size: number) => {
-  return Stock.findAndCountAll({ limit: size, offset: page * size });
+export const findAll = async (page: number, size: number, attributes: string[]) => {
+  return Stock.findAndCountAll({ limit: size, offset: page * size, attributes });
 };
 
 export const find = async (id: number) => {
