@@ -3,7 +3,8 @@
  */
 import express, { Request, Response } from 'express';
 import * as StockService from './stock.service';
-import { check, validationResult } from 'express-validator/check';
+import { validationResult } from 'express-validator/check';
+import seed from '../seed';
 import { REQUIRED, TYPES } from './validation';
 /**
  * Router Definition
@@ -71,6 +72,16 @@ stockRouter.delete('/:id', async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
     const stock = await StockService.remove(id);
     res.status(200).send({ stock });
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
+stockRouter.post('/seed/:amount', async (req: Request, res: Response) => {
+  try {
+    const amount: number = parseInt(req.params.amount, 10);
+    await seed(amount);
+    res.status(201).send(`${amount} registers added`);
   } catch (e) {
     res.status(400).send(e.message);
   }

@@ -15,7 +15,7 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT, 10);
+const PORT = 8888;
 const app = express();
 /**
  *  App Configuration
