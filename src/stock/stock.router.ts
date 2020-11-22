@@ -4,7 +4,7 @@
 import express, { Request, Response } from 'express';
 import * as StockService from './stock.service';
 import { check, validationResult } from 'express-validator/check';
-import { RULES, CHECK_ID } from './validation';
+import { REQUIRED, TYPES } from './validation';
 /**
  * Router Definition
  */
@@ -34,13 +34,14 @@ stockRouter.get('/:id', async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
   try {
     const stock = await StockService.find(id);
+    if (!stock) res.status(400).send('Registro no encontrado');
     res.status(200).send(stock);
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
 // POST items/
-stockRouter.post('/', RULES, async (req: Request, res: Response) => {
+stockRouter.post('/', [...REQUIRED, ...TYPES], async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).jsonp(errors.array());
@@ -52,25 +53,23 @@ stockRouter.post('/', RULES, async (req: Request, res: Response) => {
     res.status(400).send(e.message);
   }
 });
-stockRouter.put('/', CHECK_ID, async (req: Request, res: Response) => {
+stockRouter.put('/:id', [...TYPES], async (req: Request, res: Response) => {
   try {
+    const id: number = parseInt(req.params.id, 10);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).jsonp(errors.array());
     }
-    const stock = await StockService.update(req.body.id, req.body);
+    const stock = await StockService.update(id, req.body);
     res.status(200).send({ stock });
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
-stockRouter.delete('/', CHECK_ID, async (req: Request, res: Response) => {
+stockRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).jsonp(errors.array());
-    }
-    const stock = await StockService.remove(req.body.id);
+    const id: number = parseInt(req.params.id, 10);
+    const stock = await StockService.remove(id);
     res.status(200).send({ stock });
   } catch (e) {
     res.status(400).send(e.message);
