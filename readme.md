@@ -13,7 +13,7 @@
 ### Run last version
 
 - Clone this repository on master branch
-- run docker compose up
+- run docker-compose up
 - Api is available on port 8888 (For change it, yo should rebuild using the build instructions)
 
 ### Build the app 

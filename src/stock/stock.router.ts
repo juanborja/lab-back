@@ -54,7 +54,7 @@ stockRouter.post('/', [...REQUIRED, ...TYPES], async (req: Request, res: Respons
     res.status(400).send(e.message);
   }
 });
-stockRouter.put('/:id', [...TYPES], async (req: Request, res: Response) => {
+stockRouter.put('/:id', TYPES, async (req: Request, res: Response) => {
   try {
     const id: number = parseInt(req.params.id, 10);
     const errors = validationResult(req);
