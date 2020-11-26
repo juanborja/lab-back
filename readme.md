@@ -24,6 +24,10 @@
 
 - Change the values on .env according with your database setup
 
+- Install dependencies
+
+```  yarn ```
+
 - Build on dev mode with webpack
 
 ``` yarn web pack``` 
