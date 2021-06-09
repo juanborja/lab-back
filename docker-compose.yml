@@ -10,11 +10,11 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: "password"
     ports:
-      - '3310:3306'
+      - "3310:3306"
     expose:
-      - '3310'
+      - "3310"
     volumes:
       - stocks-db:/var/lib/mysql
   app:
@@ -30,12 +30,12 @@ services:
       DB_PORT: 3306
       ENV: ${ENV}
     ports:
-      - '8888:8888'
+      - "8889:8888"
     depends_on:
       - db
-    command: sh -c './wait-for db:3306 -- node app.js'
+    command: sh -c './wait-for db:3306 -- npm run-script dev'
     expose:
-      - '8888'
-      
+      - "8889"
+
 volumes:
   stocks-db:

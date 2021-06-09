@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node dist/app",
     "webpack": "webpack --config webpack.config.ts",
+    "dev": "webpack --config webpack.config.ts",
     "build": "webpack --config webpack.prod.ts"
   },
   "license": "MIT",
